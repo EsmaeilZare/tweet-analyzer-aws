@@ -64,39 +64,21 @@ class EC2Instance(object):
             print(e)
 
 
-try:
-    ec2_client = boto3.client(
-        "ec2",
-        aws_access_key_id=ACCESS_KEY,
-        aws_secret_access_key=SECRET_KEY,
-        aws_session_token=SESSION_TOKEN,
-        region_name='us-east-1'
-    )
-    ec2_obj = EC2Instance(ec2_client)
-    ec2_obj.grep_vpc_subnet_id()
-    ec2_obj.create_security_group()
-    ec2_obj.create_ec2_instance()
-except ClientError as e:
-    print(e)
+def initialize():
+    try:
+        ec2_client = boto3.client(
+            "ec2",
+            aws_access_key_id=ACCESS_KEY,
+            aws_secret_access_key=SECRET_KEY,
+            aws_session_token=SESSION_TOKEN,
+            region_name='us-east-1'
+        )
+        ec2_obj = EC2Instance(ec2_client)
+        ec2_obj.grep_vpc_subnet_id()
+        ec2_obj.create_security_group()
+        ec2_obj.create_ec2_instance()
+    except ClientError as e:
+        print(e)
 
 
-# here we provided the ami id of Amazon Linux 2
-
-
-# def describe_ec2_instance():
-#     try:
-#         print("Describing an EC2 instance")
-#         resource_ec2 = boto3.client(
-#             "ec2",
-#             aws_access_key_id=ACCESS_KEY,
-#             aws_secret_access_key=SECRET_KEY,
-#             aws_session_token=SESSION_TOKEN,
-#             region_name='us-east-1'
-#         )
-#         return resource_ec2.describe_instances()
-#     except Exception as e:
-#         print(e)
-
-
-# create_ec2_instance()
-# print(describe_ec2_instance())
+initialize()

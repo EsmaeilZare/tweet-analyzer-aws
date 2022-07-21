@@ -1,9 +1,6 @@
 import boto3
 from botocore.exceptions import ClientError
-
-ACCESS_KEY = "ASIA4D5Y3C2LDO2LMPE3"
-SECRET_KEY = "ciZQyEdbsupweBVkXsKkcWoYFsHtuRT7KnhgVeqm"
-SESSION_TOKEN = "FwoGZXIvYXdzEAoaDHG6S+B0/+yNh2hzCyLSAZeD5C0ZkEaJZd6DzP5rbnUEfGtLiWh94uEl77Ttirk7l+QXCFxjnJQjUwqp8QgDncMjvx5ME46MsrMoQl8+HLezyOdBKeeCNdN+aIDyfJmObcfRjAoArXie5n8FKMtyRiJKrfZd7Yy9vwwvUehrJ2wQIfNaXrQWBNurIm6KUtZZiE96/jtLfPqK154zctjGUaWlCA4vShWQn1MEF5WT4Ogc/RpIdqYiGWZkDjdU542TKbpFlVjnUJ2sq/32AiEdllca0bgiacVbWzX0uYPkZQTAGyjAmOSWBjItdUGRhOCKAThLFs1/EJHgStJwTVzTt0sPbpkDot4SfRaqy7Km+nqC+7npmcRV"
+from config.credentials import ACCESS_KEY, SECRET_KEY, SESSION_TOKEN
 
 
 class EC2Instance(object):

@@ -1,2 +1,4 @@
 boto3
 awscli
+flask
+python-decouple==3.6

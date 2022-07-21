@@ -1,29 +1,20 @@
-import sqlite3
-from flask import Flask, render_template, request, url_for, flash, redirect
-from werkzeug.exceptions import abort
+from flask import Flask, render_template, request
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import  FileStorage
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 
 
-@app.route('/create', methods=('GET', 'POST'))
-def analyze():
-    return render_template('create.html')
-
-
-@app.route('/analyze', methods=('GET', 'POST'))
-def analyze_tweets():
-    if request.method == 'POST':
-        source = request.form['source']
-        start_index = request.form['start_index']
-        end_index = request.form['end_index']
-
-        if not source:
-            flash('Source is required!')
-        else:
-            conn = get_db_connection()
-            conn.commit()
-            conn.close()
-            return redirect(url_for('index'))
-
-    return render_template('create.html')
+@app.route('/upload', methods = ['GET'])
+def render_upload_file_page():
+   return render_template('upload.html')
+	
+@app.route('/uploader', methods = ['GET', 'POST'])
+def upload_file():
+   if request.method == 'POST':
+      f = request.files['file']
+      
+      f.save(secure_filename(f.filename))
+      return 'file uploaded successfully'
+		

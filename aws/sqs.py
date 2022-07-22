@@ -2,6 +2,8 @@ from config.credentials import ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, BUCKET_NAM
 import boto3
 from botocore.exceptions import ClientError
 
+queue_url = 'https://queue.amazonaws.com/649303115657/clcprojectsqs'
+queue_name = 'clcprojectsqs'
 
 class SQS():
     @staticmethod
@@ -23,8 +25,8 @@ class SQS():
 
     def create_queue(self):
         response = self.s3_client.create_queue(
-            QueueName='clcprojectsqs.fifo',
-            Attributes={'FifoQueue': 'true'},
+            QueueName=queue_name,
+            # Attributes={'FifoQueue': 'true'},
             tags={
                 'Name': 'clcprojectsqs'
             }
@@ -33,7 +35,7 @@ class SQS():
 
     def send_message(self, message):
         response = self.s3_client.send_message(
-            QueueUrl='https://queue.amazonaws.com/649303115657/clcprojectsqs',
+            QueueUrl=queue_url,
             MessageBody=message,
             DelaySeconds= 2,
         )
@@ -41,7 +43,7 @@ class SQS():
     
     def receive_message(self, ):
         response = self.s3_client.receive_message(
-            QueueUrl='https://queue.amazonaws.com/649303115657/clcprojectsqs'
+            QueueUrl=queue_url
         )
         message = response['Messages'][0]
         print(f"response of send message {message}")
